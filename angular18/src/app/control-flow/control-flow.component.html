@@ -1,0 +1,37 @@
+<h1>Control Flow</h1>
+
+<h2>IF</h2>
+
+<!-- <ng-container *ngIf="a > b; else second">
+  <p>a is greater than b</p>
+</ng-container>
+<ng-template #second>
+  <ng-container *ngIf="b > a; else third">
+    <p>a is less than b</p>
+  </ng-container>
+</ng-template>
+<ng-template #third>
+  <p>a is equal to b</p>
+</ng-template> -->
+
+@if (a > b) {
+<p>a is greater than b</p>
+} @else if (b > a) {
+<p>a is less than b</p>
+} @else {
+<p>a is equal to b</p>
+}
+
+<h2>FOR</h2>
+
+@for (item of items; track item) {
+<p>I am inside for loop ----- {{ item }}</p>
+}
+
+<h3>SWITCH</h3>
+
+@switch (color) { @case ("Red") {
+<div>Red</div>
+} @case ("Blue") {
+<div>Blue</div>
+} }
