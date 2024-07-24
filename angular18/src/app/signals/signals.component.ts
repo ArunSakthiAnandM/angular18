@@ -1,4 +1,11 @@
-import { Component, computed, effect, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'app-signals',
@@ -13,6 +20,7 @@ export class SignalsComponent {
       console.log(`The current count is: ${this.count()}`);
     });
   }
+
   count = signal(0);
   doubleCount = computed(() => this.count() * 2);
 
@@ -21,4 +29,11 @@ export class SignalsComponent {
   }
 
   name = input<string>();
+
+  team = model('web');
+
+  modelFun(): void {
+    this.team.set('notif'); // model can be edited/reassigned
+    // 'this.name' (input) cannot be edited
+  }
 }
