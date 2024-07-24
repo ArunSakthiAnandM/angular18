@@ -1,4 +1,4 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-signals',
@@ -19,4 +19,6 @@ export class SignalsComponent {
   fun(): void {
     this.count.update((value) => value + 1);
   }
+
+  name = input<string>();
 }
