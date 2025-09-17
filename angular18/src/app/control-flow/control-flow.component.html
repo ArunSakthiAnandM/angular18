@@ -1,19 +1,7 @@
-<h1>Control Flow</h1>
+<h1>Control Flow in Angular 18</h1>
 
-<h2>IF</h2>
-
-<!-- <ng-container *ngIf="a > b; else second">
-  <p>a is greater than b</p>
-</ng-container>
-<ng-template #second>
-  <ng-container *ngIf="b > a; else third">
-    <p>a is less than b</p>
-  </ng-container>
-</ng-template>
-<ng-template #third>
-  <p>a is equal to b</p>
-</ng-template> -->
-
+<!-- 1. IF Block -->
+<h2>IF Block</h2>
 @if (a > b) {
 <p>a is greater than b</p>
 } @else if (b > a) {
@@ -22,16 +10,37 @@
 <p>a is equal to b</p>
 }
 
-<h2>FOR</h2>
+<!-- 2. FOR Block with empty state -->
+<h2>FOR Block</h2>
+<button (click)="toggleItems()">Toggle Items</button>
 
 @for (item of items; track item) {
-<p>I am inside for loop ----- {{ item }}</p>
+<p>Item: {{ item }}</p>
+} @empty {
+<p class="empty-message">No items available! Click the button to load items.</p>
 }
 
-<h3>SWITCH</h3>
-
+<!-- 3. SWITCH Block -->
+<h2>SWITCH Block</h2>
 @switch (color) { @case ("Red") {
-<div>Red</div>
+<div>Selected color is Red</div>
 } @case ("Blue") {
-<div>Blue</div>
+<div>Selected color is Blue</div>
+} @default {
+<div>Unknown color selected</div>
 } }
+
+<!-- 4. DEFER Block -->
+<h2>DEFER Block</h2>
+<p>The content below is deferred and will load on viewport visibility:</p>
+
+@defer (on viewport) {
+<div class="deferred-content">
+  <h3>Deferred Content</h3>
+  <p>{{ heavyOperation() }}</p>
+</div>
+} @placeholder {
+<p>Loading deferred content...</p>
+} @error {
+<p>Error loading deferred content!</p>
+}

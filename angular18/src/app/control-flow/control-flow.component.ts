@@ -14,6 +14,24 @@ export class ControlFlowComponent {
   b: Number = 25;
 
   items = ['item1', 'item2', 'item3'];
+  emptyItems: string[] = [];
 
   color = 'Red';
+
+  // Heavy component that we'll load with @defer
+  heavyOperation() {
+    console.log('Heavy operation performed');
+    return 'Heavy Operation Result';
+  }
+
+  // Toggle items array
+  toggleItems() {
+    if (this.items.length > 0) {
+      this.emptyItems = [...this.items];
+      this.items = [];
+    } else {
+      this.items = [...this.emptyItems];
+      this.emptyItems = [];
+    }
+  }
 }
