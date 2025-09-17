@@ -5,7 +5,13 @@ import {
   input,
   model,
   signal,
+  untracked,
 } from '@angular/core';
+
+interface User {
+  name: string;
+  age: number;
+}
 
 @Component({
   selector: 'app-signals',
@@ -15,25 +21,63 @@ import {
   styleUrl: './signals.component.scss',
 })
 export class SignalsComponent {
+  // Basic Signal
+  count = signal(0);
+
+  // Computed Signal
+  doubleCount = computed(() => this.count() * 2);
+
+  // Object Signal
+  user = signal<User>({ name: 'John', age: 30 });
+
+  // Array Signal
+  tasks = signal<string[]>(['Learn Angular 18', 'Master Signals']);
+
+  // Input Signal (readonly)
+  name = input<string>();
+
+  // Model Signal (two-way binding)
+  team = model('web');
+
+  // Computed with multiple signals
+  userInfo = computed(() => {
+    return `${this.user().name} from team ${this.team()}`;
+  });
+
   constructor() {
+    // Effect to track changes
     effect(() => {
-      console.log(`The current count is: ${this.count()}`);
+      console.log(`Count changed to: ${this.count()}`);
+      // Using untracked to read a signal without creating a dependency
+      const currentTeam = untracked(() => this.team());
+      console.log(`Current team (untracked): ${currentTeam}`);
     });
   }
 
-  count = signal(0);
-  doubleCount = computed(() => this.count() * 2);
-
-  fun(): void {
+  // Signal update methods
+  increment(): void {
     this.count.update((value) => value + 1);
   }
 
-  name = input<string>();
+  // Update object signal
+  updateUser(): void {
+    this.user.update((user) => ({
+      ...user,
+      age: user.age + 1,
+    }));
+  }
 
-  team = model('web');
+  // Update array signal
+  addTask(task: string): void {
+    this.tasks.update((tasks) => [...tasks, task]);
+  }
 
-  modelFun(): void {
-    this.team.set('notif'); // model can be edited/reassigned
-    // 'this.name' (input) cannot be edited
+  removeTask(index: number): void {
+    this.tasks.update((tasks) => tasks.filter((_, i) => i !== index));
+  }
+
+  // Model signal update
+  updateTeam(): void {
+    this.team.set(this.team() === 'web' ? 'mobile' : 'web');
   }
 }

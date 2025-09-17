@@ -1,15 +1,53 @@
-<br /><br /><br />
+<div class="signals-demo">
+  <h1>Angular 18 Signals Demo</h1>
 
-<h1>Signals</h1>
+  <!-- Basic Signal -->
+  <section class="signal-section">
+    <h2>Basic Signal</h2>
+    <p>Count: {{ count() }}</p>
+    <p>Double Count: {{ doubleCount() }}</p>
+    <button (click)="increment()">Increment</button>
+  </section>
 
-<button (click)="fun()">Click</button>
+  <!-- Object Signal -->
+  <section class="signal-section">
+    <h2>Object Signal</h2>
+    <div class="user-info">
+      <p>Name: {{ user().name }}</p>
+      <p>Age: {{ user().age }}</p>
+    </div>
+    <button (click)="updateUser()">Increment Age</button>
+  </section>
 
-<p>{{ count() }}</p>
+  <!-- Array Signal -->
+  <section class="signal-section">
+    <h2>Array Signal</h2>
+    <ul class="tasks-list">
+      @for (task of tasks(); track task) {
+      <li>
+        {{ task }}
+        <button (click)="removeTask($index)" class="remove-btn">✕</button>
+      </li>
+      }
+    </ul>
+    <div class="add-task">
+      <button (click)="addTask('New Task ' + (tasks().length + 1))">
+        Add Task
+      </button>
+    </div>
+  </section>
 
-<p>{{ doubleCount() }}</p>
+  <!-- Input and Model Signals -->
+  <section class="signal-section">
+    <h2>Input & Model Signals</h2>
+    <p>Input (readonly): {{ name() }}</p>
+    <p>Model (two-way): {{ team() }}</p>
+    <button (click)="updateTeam()">Toggle Team</button>
+  </section>
 
-<h3>{{ name() }}</h3>
-
-<button (click)="modelFun()">Model</button>
-
-<p>{{ team() }}</p>
+  <!-- Computed from Multiple Signals -->
+  <section class="signal-section">
+    <h2>Computed from Multiple Signals</h2>
+    <p>{{ userInfo() }}</p>
+  </section>
+</div>
