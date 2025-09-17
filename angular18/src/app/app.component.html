@@ -1,3 +1,15 @@
-<app-first></app-first>
-<app-control-flow></app-control-flow>
-<app-signals [name]="userName"></app-signals>
+<div class="app-container">
+  <header>
+    <h1>{{ title }}</h1>
+    <nav>
+      <a routerLink="/first" routerLinkActive="active">First</a>
+      <a routerLink="/control-flow" routerLinkActive="active">Control Flow</a>
+      <a routerLink="/signals" routerLinkActive="active">Signals</a>
+      <a routerLink="/page-one" routerLinkActive="active">View Transitions</a>
+      <a routerLink="/deferred" routerLinkActive="active">Deferred Views</a>
+    </nav>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

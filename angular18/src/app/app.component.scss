@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 30px;
+  text-align: center;
+
+  h1 {
+    color: #1976d2;
+    margin-bottom: 20px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+
+    a {
+      text-decoration: none;
+      color: #333;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #e9ecef;
+      }
+
+      &.active {
+        background-color: #1976d2;
+        color: white;
+      }
+    }
+  }
+}
+
+main {
+  // Enable view transitions
+  @media (prefers-reduced-motion: no-preference) {
+    view-transition-name: main-content;
+  }
+}
